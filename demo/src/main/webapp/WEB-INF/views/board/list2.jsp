@@ -9,16 +9,22 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-	<meta charset="UTF-8">
-	<title>게시판 목록 페이지</title>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  	<!-- 부트스트랩 CSS 추가 -->
-  	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<head>
+<meta charset="UTF-8">
+<title>게시판 목록 페이지</title>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+console.log("게시글");
+console.log("게시글 스크립트 테스트");
+/* 		$(function(){
+			$('#chk').click(function(){
+				
+			
+		}) */
+</script>
 
-
-	</head>
+</head>
 
 
 <body>
@@ -47,7 +53,7 @@
         <c:forEach var="board" items="${boards}">
             <tr>
             	<td>
-            		<input type="checkbox" name="">
+            		<input type="checkbox" id="chk" name="${board.id}">
             	</td>
                 <td>${board.id}</td>
                 <td><a href="${pageContext.request.contextPath}/board/view/${board.id}">${board.title}</a></td>
@@ -59,26 +65,8 @@
 
     <br>
     <a href="${pageContext.request.contextPath}/board/create">새 글 작성</a>
-    <input type="button" value="선택삭제" class="btn-chk-delete" onclick="deleteValue();">
-    <a href="${pageContext.request.contextPath}/board/list">목록으로 돌아가기</a>
 </body>
 
 
-<script>
- 	console.log("체크이벤트 시작");
-	const ckdId = document.querySelector('.signup-btn');
-
-	console.log(ckdId);
-</script>
-
-
-
-    <!-- 자바스크립트 추가 부트스트랩 -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-        crossorigin="anonymous"></script>
 
 </html>

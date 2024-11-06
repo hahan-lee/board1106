@@ -23,5 +23,6 @@
     <br>
     
     <a href="${pageContext.request.contextPath}/board/list">목록으로 돌아가기</a>
+    
 </body>
 </html>
