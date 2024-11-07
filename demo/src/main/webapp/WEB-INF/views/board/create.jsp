@@ -9,6 +9,7 @@
 	String userName = (loggedInUser != null) ? loggedInUser.getUserName() : "";
 
 %>
+<%@ include file="../common/header.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -30,9 +31,18 @@
         <textarea id="content" name="content" rows="10" cols="30" required></textarea><br><br>
         
         <input type="submit" value="작성">
+        <input type="button" class="goListBtn" value="목록">
     </form>
 
     <br>
     <a href="${pageContext.request.contextPath}/board/list">목록으로 돌아가기</a>
 </body>
+
+<script type="text/javascript">
+
+	function goListBtn() {
+		window.location.href = '/board/list';
+	}
+
+</script>
 </html>

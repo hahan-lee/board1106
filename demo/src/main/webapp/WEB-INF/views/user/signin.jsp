@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ include file="../common/header.jsp" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -13,9 +13,7 @@
 
 </head>
 <body>
-로그인 페이지 입니다.
-
-    
+<h1>로그인</h1>
 	<div class="container">
 		<div class="signin">
 			<form action="${pageContext.request.contextPath}/user/signin" method="post" onsubmit="return confirm()">
@@ -40,9 +38,7 @@
         <p style="color: red;">${errorMessage}</p>
     </c:if>
 
-
-<a href="${pageContext.request.contextPath}/index">시작화면</a>
-<a href="${pageContext.request.contextPath}/user/signup">회원가입</a>
+	<a href="${pageContext.request.contextPath}/user/signup">회원가입</a>
 
 
 
@@ -73,7 +69,5 @@
 	    return true; // 모든 입력이 올바르면 폼 제출
 	}
 </script>
-
-
 </body>
 </html>

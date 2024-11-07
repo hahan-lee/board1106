@@ -6,19 +6,16 @@
     // 세션에서 로그인 사용자 정보를 가져옴
     User loggedInUser = (User) session.getAttribute("loggedInUser");
 %>
-<%@ include file="${pageContext.request.contextPath}/index.jsp" %>
+<%@ include file="../common/header.jsp" %>
 
 <!DOCTYPE html>
 <html>
-	<head>
-	<meta charset="UTF-8">
-	<title>게시판 목록 페이지</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  	<!-- 부트스트랩 CSS 추가 -->
-  	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<head>
+<meta charset="UTF-8">
+<title>게시판 목록 페이지</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-
-	</head>
+</head>
 
 
 <body>
@@ -85,7 +82,8 @@
                 </div>
             </div>
         </div>
-		<input type="button" value="선택삭제" class="btn btn-outline-info">
+		<input type="button" value="선택삭제" class="btn btn-outline-info deleteBtn">
+		<input type="button" value="글 작성" class="btn btn-outline-info createBtn" onclick="goToCreatePage();">
     </div>
     <!-- /.container-fluid -->
 
@@ -95,18 +93,19 @@
 	</div>
 
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 
 
 <script>
 
-	console.log('test');
+	/* 글작성 이동 스크립트 */
+	function goToCreatePage() {
+        window.location.href = '/board/create';
+    }
+	
 	
 	/* chk 박스 이벤트 */
 	$(function(){
-		console.log('jquery');
 		
 		const chkObj = document.getElementsByName("RowCheck");
 		const rowCnt = chkObj.length;
@@ -133,7 +132,7 @@
 		
 
         // 선택 삭제 버튼 클릭 시 AJAX 요청 전송
-        $('.btn-outline-info').on('click', function() {
+        $('.deleteBtn').on('click', function() {
             let selectedIds = [];
             $('input[name="RowCheck"]:checked').each(function() {
                 selectedIds.push($(this).val());
@@ -172,6 +171,8 @@
                     location.reload();
                 }
             });
+            
+            
         });
 		
 		
