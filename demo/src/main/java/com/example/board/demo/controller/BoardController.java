@@ -1,17 +1,26 @@
 package com.example.board.demo.controller;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.board.demo.model.Board;
 import com.example.board.demo.service.BoardService;
 
+
 @Controller
 @RequestMapping("/board")
 public class BoardController {
+	
     private final BoardService boardService;
+
     
     public BoardController(BoardService boardService) {
         this.boardService = boardService;
@@ -57,9 +66,17 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
+    //게시글 삭제
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable int id) {
         boardService.delete(id);
         return "redirect:/board/list";
+    }
+    
+    @PostMapping("/deleteSelected")
+    public String deleteSelected(@RequestParam("selectedIds") List<Integer> selectedIds) {
+    	System.out.println("Selected IDs: " + selectedIds);  // 로그 출력
+        boardService.deleteSelectedBoards(selectedIds);
+        return "success";
     }
 }

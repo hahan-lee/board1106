@@ -21,7 +21,11 @@
         WHERE id = #{id}
     </update>
     
-    <delete id="delete" parameterType="int">
-        DELETE FROM Board WHERE id = #{id}
+    <delete id="deleteSelectedBoards" parameterType="list">
+        DELETE FROM Board WHERE id IN 
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
     </delete>
+    
 </mapper>

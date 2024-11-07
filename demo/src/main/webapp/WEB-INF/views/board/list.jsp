@@ -6,14 +6,14 @@
     // 세션에서 로그인 사용자 정보를 가져옴
     User loggedInUser = (User) session.getAttribute("loggedInUser");
 %>
+<%@ include file="${pageContext.request.contextPath}/index.jsp" %>
 
 <!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="UTF-8">
 	<title>게시판 목록 페이지</title>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   	<!-- 부트스트랩 CSS 추가 -->
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
@@ -22,120 +22,165 @@
 
 
 <body>
-    <h1>게시판 목록</h1>
-    <c:choose>
-        <c:when test="${not empty loggedInUser}">
-            <!-- 로그인된 사용자 -->
-            <p>안녕하세요, <strong>아이디:<%= loggedInUser.getUserId() %> 이름:<%= loggedInUser.getUserName() %></strong>님!</p>
-            <a href="${pageContext.request.contextPath}/user/logout">로그아웃</a>
-        </c:when>
-        <c:otherwise>
-            <!-- 비로그인 상태 -->
-            <p>비회원 입니다.</p>
-            <a href="${pageContext.request.contextPath}/user/signin">로그인</a>
-        </c:otherwise>
-    </c:choose>    
-    <a href="${pageContext.request.contextPath}/board/delete/${board.id}">삭제</a>
-    <table border="1">
-        <tr>
-            <th></th>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-        </tr>
-        <c:forEach var="board" items="${boards}">
-            <tr>
-            	<td>
-            		<input type="checkbox" name="">
-            	</td>
-                <td>${board.id}</td>
-                <td><a href="${pageContext.request.contextPath}/board/view/${board.id}">${board.title}</a></td>
-                <td>${board.writer}</td>
-                <td>${board.createdAt}</td>
-            </tr>
-        </c:forEach>
-    </table>
+    
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
 
-    <br>
-    <a href="${pageContext.request.contextPath}/board/create">새 글 작성</a>
-    <input type="button" value="선택삭제" class="btn-chk-delete" onclick="deleteValue();">
-    <a href="${pageContext.request.contextPath}/index">목록으로 돌아가기</a>
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Board-list</h1>
+        
+        <p class="mb-4">
+			<!-- 로그인 유저 확인 세션데이터 받기 -->
+			<div>
+			<c:choose>
+			    <c:when test="${not empty loggedInUser}">
+			        <!-- 로그인된 사용자 -->
+			        <p>안녕하세요, <strong>아이디:<%= loggedInUser.getUserId() %> 이름:<%= loggedInUser.getUserName() %></strong>님!</p>
+			        <a href="${pageContext.request.contextPath}/user/logout">로그아웃</a>
+			    </c:when>
+			    <c:otherwise>
+			        <!-- 비로그인 상태 -->
+			        <p>비회원 입니다.</p>
+			        <a href="${pageContext.request.contextPath}/user/signin">로그인</a>
+			    </c:otherwise>
+			</c:choose>     
+			</div>       
+        </p>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                	<form id="deleteForm" method="POST" action="${pageContext.request.contextPath}/board/deleteSelected">
+
+	                    <h1></h1>
+	                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	                        <thead>
+	                            <tr>
+	                                <th><input type="checkbox" id="allCheck" name="allCheck"></th>
+	                                <th>No.</th>
+	                                <th>Title</th>
+	                                <th>Content</th>
+	                                <th>Writer</th>
+	                                <th>Date</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                            <c:forEach var="board" items="${boards}" varStatus="status">
+						            <tr>
+						            	<td><input type="checkbox" id="RowCheck" name="RowCheck" value="${board.id}"/></td>
+						                <td>${status.index + 1}</td>
+						                <td><a href="${pageContext.request.contextPath}/board/view/${board.id}">${board.title}</a></td>
+						                <td>${board.content}</td>
+						                <td>${board.writer}</td>
+						                <td>${board.createdAt}</td>
+						            </tr>
+						        </c:forEach>
+	                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+		<input type="button" value="선택삭제" class="btn btn-outline-info">
+    </div>
+    <!-- /.container-fluid -->
+
+	<div>
+		<a href="${pageContext.request.contextPath}/board/create">글 작성</a>
+	    <a href="${pageContext.request.contextPath}/index">첫화면 가기</a>    
+	</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 
-<!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">게시판목록</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-<script>
- 	console.log("체크이벤트 시작");
-	const ckdId = document.querySelector('.signup-btn');
 
-	console.log(ckdId);
+<script>
+
+	console.log('test');
+	
+	/* chk 박스 이벤트 */
+	$(function(){
+		console.log('jquery');
+		
+		const chkObj = document.getElementsByName("RowCheck");
+		const rowCnt = chkObj.length;
+
+		if (rowCnt > 0) {
+		    /* 전체체크 선택 시 모든 체크박스 체크설정하기 */
+		    $("input[name='allCheck']").click(function(){
+		        const chk_listArr = $("input[name='RowCheck']");
+		        for (var i=0; i<chk_listArr.length; i++){
+		            chk_listArr[i].checked = this.checked;
+		        }
+		    });
+
+		    /* 선택체크 모두 선택 시 전체체크박스 선택 */
+		    $("input[name='RowCheck']").click(function(){
+		        if($("input[name='RowCheck']:checked").length == rowCnt){
+		            $("input[name='allCheck']")[0].checked = true;
+		        }
+		        else{
+		            $("input[name='allCheck']")[0].checked = false;
+		        }
+		    });
+		}
+		
+
+        // 선택 삭제 버튼 클릭 시 AJAX 요청 전송
+        $('.btn-outline-info').on('click', function() {
+            let selectedIds = [];
+            $('input[name="RowCheck"]:checked').each(function() {
+                selectedIds.push($(this).val());
+            });
+
+            if (selectedIds.length === 0) {
+                alert("선택된 항목이 없습니다.");
+                return;
+            }else{
+            	confirm("삭제하시겠습니까?");
+            	console.log(selectedIds);
+            }
+
+            
+            $.ajax({
+                url: '${pageContext.request.contextPath}/board/deleteSelected',
+                type: 'POST',
+                traditional: true,
+                data: { 
+                	selectedIds: selectedIds //배열 전달
+                },
+                success: function(res) {
+                    if (res === 'success') {
+                        alert("선택된 게시글이 삭제되었습니다.");
+                        location.reload(); // 페이지 새로고침하여 테이블 갱신
+                    } else {
+                        alert("삭제 실패. 다시 시도해주세요.");
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, error) {
+                	//404 post 오류 발생중임.. 에러 못잡고있음.. 삭제는 잘된다..
+                    console.log("Status: " + status);
+                    console.log("Error: " + error);
+                    /* alert("에러가 발생했습니다."); */
+                    location.reload();
+                }
+            });
+        });
+		
+		
+		
+		
+	});
+	
 </script>
 
-
-
-    <!-- 자바스크립트 추가 부트스트랩 -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-        crossorigin="anonymous"></script>
+<!-- 자바스크립트 추가 부트스트랩 -->
 
 </html>
