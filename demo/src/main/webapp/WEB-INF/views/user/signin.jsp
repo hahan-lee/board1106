@@ -12,26 +12,35 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </head>
-<body>
-<h1>로그인</h1>
-	<div class="container">
-		<div class="signin">
-			<form action="${pageContext.request.contextPath}/user/signin" method="post" onsubmit="return confirm()">
-				<div class="form-group" align="left">
-					<label for="">아이디</label>
-					<input type="text" class="" id="userId" name="userId" placeholder="아이디를 입력해주세요.">
+<body class="bg-primary">
+
+<div class="container">
+	<div class="row justify-content-center">
+	    <div class="col-lg-5">
+	    	<div class="card shadow-lg border-0 rounded-lg mt-5">
+				<div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+				<div class="card-body">
+					<form action="${pageContext.request.contextPath}/user/signin" method="post" onsubmit="return confirm()">
+						<div class="form-floating mb-3" align="left">
+							<label for="">아이디</label>
+							<input type="text" class="form-control form-control-user" id="userId" name="userId" placeholder="아이디를 입력해주세요.">
+						</div>
+						<div class="form-floating mb-3" align="left">
+							<label for="">비밀번호</label>
+							<input type="password" class="form-control form-control-user" id="userPw" name="userPw" placeholder="비밀번호를 입력해주세요." maxlength=16>
+						</div>
+					
+						<div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+							<a class="small" href="password.html">회원가입</a>
+							<button type="submit" class="btn btn-primary" id="loginBtn">로그인</button>
+                        </div>
+					</form>
 				</div>
-				<div class="form-group" align="left">
-					<label for="">비밀번호</label>
-					<input type="password" class="" id="userPw" name="userPw" placeholder="비밀번호를 입력해주세요." maxlength=16>
-					<div style="color: red;font-size:12px;">비밀번호는 16자 이내로 입력해 주세요.</div>
-				</div>
-				<div class="form-group">
-					<button type="submit" id="loginBtn">로그인</button>				
-				</div>
-			</form>
-		</div>
+			</div>
+	    </div>
 	</div>
+</div>
+
 	
 	<!-- 컨트롤러 model 입력 메세지 -->
     <c:if test="${not empty errorMessage}">

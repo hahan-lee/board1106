@@ -90,11 +90,9 @@
 		<a href="${pageContext.request.contextPath}/board/create">글 작성</a>
 	    <a href="${pageContext.request.contextPath}/index">첫화면 가기</a>    
 	</div>
-
-
-</body>
-
-
+	
+	
+	
 <script>
 
 	/* 글작성 이동 스크립트 */
@@ -156,7 +154,7 @@
            		url:'${pageContext.request.contextPath}/board/deleteSelected',
            		method:'POST',
            		data:{
-           		 	selectedIds: selectedIds // 선택된 ID들을 JSON 형태로 전송
+           		 	selectedIds: selectedIds // JSON 데이터
            		}
            	})
            	.then((res)=>{
@@ -180,6 +178,9 @@
 	
 </script>
 
-<!-- 자바스크립트 추가 부트스트랩 -->
+
+</body>
+
+
 
 </html>
