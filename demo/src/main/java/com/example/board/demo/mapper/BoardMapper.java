@@ -14,5 +14,5 @@ public interface BoardMapper {
     int insert(Board board); //쓰기
     int update(Board board); //수정
     int delete(int id); //삭제
-    void deleteSelectedBoards(List<Integer> selectedIds);
+    void deleteSelectedBoards(@Param("selectedIds") List<Integer> selectedIds);
 }

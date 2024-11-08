@@ -14,7 +14,6 @@
 <meta charset="UTF-8">
 <title>게시판 목록 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </head>
 
 
@@ -134,49 +133,48 @@
         // 선택 삭제 버튼 클릭 시 AJAX 요청 전송
         $('.deleteBtn').on('click', function() {
             let selectedIds = [];
+            
+            
             $('input[name="RowCheck"]:checked').each(function() {
                 selectedIds.push($(this).val());
             });
 
             if (selectedIds.length === 0) {
+            	/* 선택값 리스트 없을 시 */
                 alert("선택된 항목이 없습니다.");
                 return;
-            }else{
-            	confirm("삭제하시겠습니까?");
-            	console.log(selectedIds);
             }
-
-            
-            $.ajax({
-                url: '${pageContext.request.contextPath}/board/deleteSelected',
-                type: 'POST',
-                traditional: true,
-                data: { 
-                	selectedIds: selectedIds //배열 전달
-                },
-                success: function(res) {
-                    if (res === 'success') {
-                        alert("선택된 게시글이 삭제되었습니다.");
-                        location.reload(); // 페이지 새로고침하여 테이블 갱신
-                    } else {
-                        alert("삭제 실패. 다시 시도해주세요.");
-                        location.reload();
-                    }
-                },
-                error: function(xhr, status, error) {
-                	//404 post 오류 발생중임.. 에러 못잡고있음.. 삭제는 잘된다..
-                    console.log("Status: " + status);
-                    console.log("Error: " + error);
-                    /* alert("에러가 발생했습니다."); */
-                    location.reload();
-                }
-            });
-            
-            
+           
+           	/* 선택값 존재 => 삭제여부 confirm */
+           	if(!confirm("삭제하시겠습니까?")){
+           		alert('취소하였습니다.');
+           		return;
+           	}
+           	
+            /* 다중삭제 컨트롤러 전달 */
+           	axios({
+           		url:'${pageContext.request.contextPath}/board/deleteSelected',
+           		method:'POST',
+           		data:{
+           		 	selectedIds: selectedIds // 선택된 ID들을 JSON 형태로 전송
+           		}
+           	})
+           	.then((res)=>{
+           	    // 성공적인 응답 처리
+           	    if (res.data.message === 'success') {
+           	        alert("선택된 게시글이 삭제되었습니다.");
+           	        location.reload(); // 페이지 새로고침하여 테이블 갱신
+           	    } else {
+           	        alert("삭제 실패. 다시 시도해주세요.");
+           	    }
+           	})
+           	.catch((error)=>{
+           	    // 에러 처리
+           	    console.log("Error:", error);
+           	    alert("에러가 발생했습니다.");
+           	});    
+           
         });
-		
-		
-		
 		
 	});
 	

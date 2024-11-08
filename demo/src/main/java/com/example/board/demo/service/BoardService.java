@@ -44,7 +44,7 @@ public class BoardService {
                 throw new IllegalArgumentException("선택된 항목이 없습니다.");
             }
             // 삭제 처리 로직
-            System.out.println("Selected IDs: " + selectedIds);
+            System.out.println("service // Selected IDs: " + selectedIds);//로그테스트
             boardMapper.deleteSelectedBoards(selectedIds);
         } catch (Exception e) {
             // 예외 처리 및 로그 출력

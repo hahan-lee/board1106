@@ -1,15 +1,18 @@
 package com.example.board.demo.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.board.demo.model.Board;
 import com.example.board.demo.service.BoardService;
@@ -74,9 +77,30 @@ public class BoardController {
     }
     
     @PostMapping("/deleteSelected")
-    public String deleteSelected(@RequestParam("selectedIds") List<Integer> selectedIds) {
-    	System.out.println("Selected IDs: " + selectedIds);  // 로그 출력
-        boardService.deleteSelectedBoards(selectedIds);
-        return "success";
+    public ResponseEntity<Map<String, String>> deleteSelected(@RequestBody Map<String, List<Integer>> requestBody) {
+        List<Integer> selectedIds = requestBody.get("selectedIds");
+        
+        System.out.println("Selected IDs: " + selectedIds);  // 로그 출력
+        
+        //선택항목 없음
+        if (selectedIds == null || selectedIds.isEmpty()) {
+        	Map<String, String> errorResponse = new HashMap<>();
+        	errorResponse.put("message", "선택된 항목이 없습니다.");
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+        
+        try {
+        	//삭제성공
+        	boardService.deleteSelectedBoards(selectedIds);
+        }
+        catch (Exception e){
+        	Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "삭제 처리 중 오류가 발생했습니다.");
+            return ResponseEntity.status(500).body(errorResponse);
+        }
+        
+        Map<String, String> successResponse = new HashMap<>();
+        successResponse.put("message", "success");
+        return ResponseEntity.ok(successResponse);
     }
 }

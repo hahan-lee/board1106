@@ -21,9 +21,9 @@
         WHERE id = #{id}
     </update>
     
-    <delete id="deleteSelectedBoards" parameterType="list">
+    <delete id="deleteSelectedBoards" parameterType="java.util.List">
         DELETE FROM Board WHERE id IN 
-        <foreach item="id" collection="list" open="(" separator="," close=")">
+        <foreach collection="selectedIds" item="id" open="(" separator="," close= ")">
             #{id}
         </foreach>
     </delete>
