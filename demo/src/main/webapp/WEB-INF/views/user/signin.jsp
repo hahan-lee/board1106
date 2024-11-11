@@ -28,10 +28,16 @@
 						<div class="form-floating mb-3" align="left">
 							<label for="">비밀번호</label>
 							<input type="password" class="form-control form-control-user" id="userPw" name="userPw" placeholder="비밀번호를 입력해주세요." maxlength=16>
+						<!-- 컨트롤러 model 입력 메세지 -->
+					    <c:if test="${not empty errorMessage}">
+					        <p style="color: red;">${errorMessage}</p>
+					    </c:if>
+											
+						
 						</div>
 					
 						<div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-							<a class="small" href="password.html">회원가입</a>
+							<a href='${pageContext.request.contextPath}/user/signup'>회원가입</a>
 							<button type="submit" class="btn btn-primary" id="loginBtn">로그인</button>
                         </div>
 					</form>
@@ -42,14 +48,7 @@
 </div>
 
 	
-	<!-- 컨트롤러 model 입력 메세지 -->
-    <c:if test="${not empty errorMessage}">
-        <p style="color: red;">${errorMessage}</p>
-    </c:if>
-
-	<a href="${pageContext.request.contextPath}/user/signup">회원가입</a>
-
-
+	
 
 <script type="text/javascript">
 	/* 스크립트 위치 오류 아래로 이동 */

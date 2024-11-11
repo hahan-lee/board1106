@@ -7,6 +7,8 @@
     User loggedInUser = (User) session.getAttribute("loggedInUser");
 %>
 <%@ include file="common/header.jsp" %>
+<%@page import="java.util.Date" %><%@page import="java.text.SimpleDateFormat" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -16,8 +18,25 @@
 </head>
 <body>
 스프링부트 연결화면
-<h1> 메인화면 테스트 입니다. </h1>
-<h1>데이터 받기 test : ${message}</h1>
+<%Date now = new Date();%><%=now %>
+<br>
+<%
+	SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
+	String today = sf.format(now);
+%>
+<%=today %>
+<br>
+<%
+sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+today = sf.format(now);%><%=today 
+%>
+<br>
+<%sf = new SimpleDateFormat("yyyy년MM월dd일 E요일 a hh:mm:ss");
+today = sf.format(now);%>
+<%=today %>
+<br>
+
+
 
     <c:choose>
         <c:when test="${not empty loggedInUser}">

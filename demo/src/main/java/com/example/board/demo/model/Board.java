@@ -3,6 +3,19 @@ package com.example.board.demo.model;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Board {
 
 	private int id;
@@ -11,34 +24,8 @@ public class Board {
     private String writer;
     private Date createdAt;
 
-    public int getId() {
-		return id;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public String getContent() {
-		return content;
-	}
-	public String getWriter() {
-		return writer;
-	}
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
+    //수정일자, 수정인 추가
+    private Date updateAt;
+    private String updateUser; //굳이..
+    
 }

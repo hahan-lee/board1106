@@ -21,7 +21,7 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	
+	//회원리스트 출력
     @GetMapping("user/userlist")
     public String userlist(Model model) {
         model.addAttribute("Users", userService.findAll());
@@ -39,25 +39,21 @@ public class UserController {
     		return "user/signup";//회원가입페이지 그대로
     	}
     	
-    	userService.insert(user);//회원가입 쿼리 실행
-    	return "redirect:/user/signin"; //로그인페이지 이동
+    	userService.insert(user);
+    	return "redirect:/user/signin"; 
     }
     
-    
-    
-    
-    
-    //로그인&로그아웃
+
     // 로그인 요청 처리
     @PostMapping("user/signin")
     public String login(@RequestParam String userId, @RequestParam String userPw, HttpSession session, Model model) {
-        //아이디, 비밀번호 입력하지 않은 경우
-        // 아이디나 비밀번호가 입력되지 않은 경우
+        //아이디 또는 비밀번호 입력하지 않은 경우
         if (userId == null || userId.trim().isEmpty() || userPw == null || userPw.trim().isEmpty()) {
             model.addAttribute("errorMessage", "아이디와 비밀번호를 모두 입력해주세요.");
-            return "user/signin"; // 로그인 페이지로 다시 이동
+            return "user/signin"; // 로그인 페이지 유지
         }
     	
+        //로그인 데이터 받음
     	User user = userService.findById(userId);             
         if (user != null && user.getUserPw().equals(userPw)) {
             session.setAttribute("loggedInUser", user);
@@ -70,13 +66,11 @@ public class UserController {
         }
     }
     
-    //로그아웃 처리 -> 인덱스페이지 이동
-    
     // 로그아웃 요청 처리
     @GetMapping("user/logout")
     public String logout(HttpSession session) {
         session.invalidate(); // 세션 무효화 - 로그아웃
-        return "redirect:/user/signin"; // 로그아웃 후 로그인 페이지로 이동
+        return "redirect:/user/signin"; // 로그인 페이지 이동
     }
 	
 }

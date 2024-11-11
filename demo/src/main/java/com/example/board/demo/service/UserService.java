@@ -31,9 +31,5 @@ public class UserService {
         return userMapper.insert(user);
     }
 
-    //회원정보수정 - 한다면?
-    public int update(User user) {
-        return userMapper.update(user);
-    }
 
 }

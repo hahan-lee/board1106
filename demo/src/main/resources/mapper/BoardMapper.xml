@@ -3,24 +3,45 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.board.demo.mapper.BoardMapper">
-    <select id="findAll" resultType="Board">
-        SELECT * FROM Board
+
+	<!-- 페이지네이션 리스트-->
+    <select id="findAll" parameterType="SearchDto" resultType="Board">
+       	SELECT *
+		FROM Board
+		WHERE Id IS NOT NULL
+		ORDER BY Id DESC
+		OFFSET #{pagination.limitStart} ROWS
+		FETCH NEXT #{recordSize} ROWS ONLY;
     </select>
-    
+
+    <!-- 게시글 수 카운팅 -->
+    <select id="count" parameterType="SearchDto" resultType="int">
+        SELECT COUNT(*) FROM Board
+    </select>
+
+   	<!-- 게시글 작성-->
     <insert id="insert" parameterType="Board" >
         INSERT INTO Board (title, content, writer)
         VALUES (#{title}, #{content}, #{writer})
     </insert>
     
+    <!-- 해당 id 게시글 선택 -->
     <select id="findById" parameterType="int" resultType="Board">
         SELECT * FROM Board WHERE id = #{id}
     </select>
     
+    <!-- 게시글 수정, 수정일자 변경-->
     <update id="update" parameterType="Board">
-        UPDATE Board SET title = #{title}, content = #{content}, writer = #{writer}
+        UPDATE Board SET title = #{title}, content = #{content}, writer = #{writer}, updateAt = GETDATE()
         WHERE id = #{id}
     </update>
     
+    <!-- 해당 게시글 삭제-->
+    <delete id="delete" parameterType="int">
+        DELETE FROM Board WHERE id = #{id}
+    </delete>
+    
+    <!-- 게시글 다중 삭제-->
     <delete id="deleteSelectedBoards" parameterType="java.util.List">
         DELETE FROM Board WHERE id IN 
         <foreach collection="selectedIds" item="id" open="(" separator="," close= ")">

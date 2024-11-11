@@ -91,8 +91,6 @@
 
 <script type="text/javascript">
 
-	console.log("회원가입스크립트")
-	
 	function log(item){
 		console.log(item)
 	}
