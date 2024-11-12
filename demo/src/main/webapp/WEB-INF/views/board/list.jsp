@@ -3,9 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../common/header.jsp" %>
 
-<%@ page import="com.example.board.demo.model.User" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+<%@ page import="com.example.board.demo.model.User" %>
 <%
     // 세션에서 로그인 사용자 정보를 가져옴
     User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -18,39 +17,23 @@
 <meta charset="UTF-8">
 <title>게시판 목록 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <style>
-
-.pagination-list .active {
-    color: #ccc;
-    pointer-events: none;
-    cursor: not-allowed;
-    font-weight: bold;
-}
-
-.pagination-list a {
-    color: #1c1c1c;
-    text-decoration-line : none;
-}
-.pagination-list {
-    list-style-type: none;
-    display: flex;
-    padding: 0;
-    margin: 0;
-}
-.pagination-list li {
-    margin-right: 10px;
-}
-
-.pagination-list li:last-child {
-    margin-right: 0;
-}
+	.btnBox {
+	  display: flex;
+	  flex-direction: row;
+	  justify-content: space-between;
+	  flex-wrap: nowrap;
+	}
+	
+	.creatBtnBox{
+	}
 </style>
+
 </head>
 
 
 <body>
-    
+
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <p class="mb-4">
@@ -64,82 +47,78 @@
 			    </c:when>
 			    <c:otherwise>
 			        <!-- 비로그인 상태 -->
-			        <p class="not-logged-in">비회원 입니다.  <a href="${pageContext.request.contextPath}/user/signin">로그인</a></p>
+			        <p class="lead not-logged-in">비회원 입니다.  <a href="${pageContext.request.contextPath}/user/signin">로그인</a></p>
 			    </c:otherwise>
 			</c:choose>     
 			</div>       
         </p>
-
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Board list</h6>
-                
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                	<form id="deleteForm" method="POST" action="${pageContext.request.contextPath}/board/deleteSelected">
-
-	                    <h1></h1>
-	                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-	                        <thead>
-	                            <tr>
-	                                <th><input type="checkbox" id="allCheck" name="allCheck"></th>
-	                                <th>No.</th>
-	                                <th>Title</th>
-	                                <th>Content</th>
-	                                <th>Writer</th>
-	                                <th>Date</th>
-	                            </tr>
-	                        </thead>
-	                        <tbody>
-	                            <c:forEach var="board" items="${response.list}" varStatus="status">
-						            <tr>
-						            	<td><input type="checkbox" id="RowCheck" name="RowCheck" value="${board.id}"/></td>
-						                <td>${response.pagination.limitStart + status.index+1}</td>
-						                <td><a href="${pageContext.request.contextPath}/board/view/${board.id}">${board.title}</a></td>
-						                <td>${board.content}</td>
-						                <td>${board.writer}</td>
-						                <td>
-						                	<fmt:formatDate value="${board.createdAt}" pattern="yyyy년 MM월 dd일 a HH:mm"/>
-						                </td>
-						            </tr>
-						        </c:forEach>
-	                    </table>
-                    </form>
-                </div>
-            </div>
-			
-			<!-- 페이지네이션 버튼 생성 -->
-			<div class="pagination">
-			    <ul class="pagination-list">
-			    	<!-- 첫페이지 버튼 -->
-			    	<li class="paginate_button page-item previous disabled"><a href="?page=${1}&recordSize=${params.recordSize}" class="prev">처음으로</a></li>
-			        <!-- 이전 페이지 버튼 -->
-			        <c:if test="${response.pagination.existPrevPage}">
-			            <li class="paginate_button page-item previous disabled"><a href="?page=${response.pagination.startPage - 1}&recordSize=${params.recordSize}" class="prev">이전</a></li>
-			        </c:if>
-			
-			        <!-- 페이지 번호 버튼 -->
-			        <c:forEach var="i" begin="${response.pagination.startPage}" end="${response.pagination.endPage}">
-			            <li class="${i == params.page ? 'active' : ''}">
-			                <a href="?page=${i}&recordSize=${params.recordSize}">${i}</a>
-			            </li>
-			        </c:forEach>
-			
-			        <!-- 다음 페이지 버튼 -->
-			        <c:if test="${response.pagination.existNextPage}">
-			            <li class="paginate_button page-item next disabled"><a href="?page=${response.pagination.endPage + 1}&recordSize=${params.recordSize}" class="next">다음</a></li>
-			        </c:if>
-			        <!-- 끝페이지 버튼 -->
-			    	<li><a href="?page=${response.pagination.totalPageCount}&recordSize=${params.recordSize}" class="prev">끝으로</a></li>
-			    </ul>
+        <!-- 테이블 -->
+        <form id="deleteForm" method="POST" action="${pageContext.request.contextPath}/board/deleteSelected">
+			<table class="table table-hover">
+			  <thead>
+		          <tr>
+		              <th><input class="form-check-input" type="checkbox" id="allCheck" name="allCheck"></th>
+		              <th>No.</th>
+		              <th>Title</th>
+		              <th>Content</th>
+		              <th>Writer</th>
+		              <th>Date</th>
+		          </tr>
+			  </thead>
+			  <tbody>
+		           <c:forEach var="board" items="${response.list}" varStatus="status">
+			            <tr class="table-primary" >
+			            	<td><input class="form-check-input" type="checkbox" id="RowCheck" name="RowCheck" value="${board.id}"/></td>
+			                <td>${response.pagination.limitStart + status.index+1}</td>
+			                <td><a href="${pageContext.request.contextPath}/board/view/${board.id}">${board.title}</a></td>
+			                <td>${board.content}</td>
+			                <td>${board.writer}</td>
+			                <td>
+			                	<fmt:formatDate value="${board.createdAt}" pattern="yyyy년 MM월 dd일 a HH:mm"/>
+			                </td>
+			            </tr>
+			        </c:forEach>		
+			  </tbody>
+			</table>
+			<div class="btnBox">
+				<div class="deleteBtnBox">
+					<button class="deleteBtn btn btn-outline-secondary">선택삭제</button>
+				</div>
+				<!-- 페이지네이션 그룹 -->
+				
+				<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+			    	<div class="btn-group">
+			    		<!-- 첫페이지 버튼 -->
+			    		<a class="btn btn-secondary" href="?page=${1}&recordSize=${params.recordSize}" class="prev">&laquo;</a>
+				        <!-- 이전 페이지 버튼 -->
+				        <c:if test="${response.pagination.existPrevPage}">
+			            	<a class="btn btn-secondary" href="?page=${response.pagination.startPage - 1}&recordSize=${params.recordSize}" class="prev">&lt;</a>
+				        </c:if>
+					
+					
+				        <!-- 페이지 번호 버튼 -->
+				        <c:forEach var="i" begin="${response.pagination.startPage}" end="${response.pagination.endPage}">
+			                <a class="btn btn-secondary" href="?page=${i}&recordSize=${params.recordSize}">${i}</a>
+				        </c:forEach>
+				    
+				        <c:if test="${response.pagination.existNextPage}">
+			            	<!-- 다음 페이지 버튼 -->
+			            	<a class="btn btn-secondary" href="?page=${response.pagination.endPage + 1}&recordSize=${params.recordSize}" class="next">&gt;</a>
+				        </c:if>
+			        	<!-- 끝페이지 버튼 -->
+			    		<a class="btn btn-secondary" href="?page=${response.pagination.totalPageCount}&recordSize=${params.recordSize}" class="prev">&raquo;</a>
+			    	</div>
+				</div>
+				<!-- 글작성 -->
+				<div class="creatBtnBox">
+					<button type="button" class="createBtn btn btn-outline-primary" onclick="goToCreatePage();">글작성</button>
+				</div>
 			</div>
-        </div>
-		<input type="button" value="선택삭제" class="btn btn-outline-info deleteBtn">
-		<input type="button" value="글 작성" class="btn btn-outline-info createBtn" onclick="goToCreatePage();">
-    </div>
-	
+		</form>
+	</div>
+		
+		
+
 	
 <script>
 
@@ -152,13 +131,15 @@
 	/* chk 박스 이벤트 */
 	$(function(){
 		
-		const chkObj = document.getElementsByName("RowCheck");
-		const rowCnt = chkObj.length;
+		const rowCheck = $("input[name='RowCheck']");
+		const rowCnt = rowCheck.length;
+		const allCheck = $("input[name='allCheck']");
+		
 
 		if (rowCnt > 0) {
 		    /* 전체체크 선택 시 모든 체크박스 체크설정하기 */
-		    $("input[name='allCheck']").click(function(){
-		        const chk_listArr = $("input[name='RowCheck']");
+		    allCheck.click(function(){
+		        const chk_listArr = rowCheck;
 		        
 		        for (let i=0; i<chk_listArr.length; i++){
 		            chk_listArr[i].checked = this.checked;
@@ -166,21 +147,20 @@
 		    });
 
 		    /* 선택체크 모두 선택 시 전체체크박스 선택 */
-		    $("input[name='RowCheck']").click(function(){
+		    rowCheck.click(function(){
 		        if($("input[name='RowCheck']:checked").length == rowCnt){
-		            $("input[name='allCheck']")[0].checked = true;
+		        	allCheck[0].checked = true;
 		        }
 		        else{
-		            $("input[name='allCheck']")[0].checked = false;
+		        	allCheck[0].checked = false;
 		        }
 		    });
 		}
 		
 
-        // 선택 삭제 버튼 클릭 시 AJAX 요청 전송
+        // 선택 삭제 버튼 클릭 시 aixos 요청 전송
         $('.deleteBtn').on('click', function() {
             let selectedIds = [];
-            
             
             $('input[name="RowCheck"]:checked').each(function() {
                 selectedIds.push($(this).val());

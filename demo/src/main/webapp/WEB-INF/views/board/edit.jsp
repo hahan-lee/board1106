@@ -11,7 +11,7 @@
 <body>
     <h1>게시물 수정</h1>
     
-    <form action="${pageContext.request.contextPath}/board/edit" method="post">
+    <form action="${pageContext.request.contextPath}/board/edit" method="post"  onsubmit="return confirm('정말 수정하시겠습니까?');">
         <input type="hidden" name="id" value="${board.id}">
 
         <div>
@@ -21,6 +21,11 @@
         <div>
         	<label for="writer">작성자:</label><br>
         	<input type="text" id="writer" name="writer" value="${board.writer}" required><br><br>
+        </div>
+        <div>
+        	<label for="updateUser">수정자:</label><br>
+        	<input type="text" id="updateUser" name="updateUser" value="${board.updateUser}" required><br><br>
+        	<p>작성자와 일치하지 않을 시 수정자를 변경해주세요.</p>
         </div>
         <div>
 	       	<p>
@@ -39,11 +44,13 @@
 	        <textarea id="content" name="content" rows="10" cols="30" required>${board.content}</textarea><br><br>
         </div>
         <div>
-	        <input type="submit" value="수정">
+	        <button type="submit">수정</button>
         </div>
     </form>
 
     <br>
     <a href="${pageContext.request.contextPath}/board/view/${board.id}">뒤로 가기</a>
+
+    
 </body>
 </html>

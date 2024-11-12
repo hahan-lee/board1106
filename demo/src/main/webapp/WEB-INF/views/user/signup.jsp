@@ -14,11 +14,24 @@
 	input {
 		width : 300px
 	}
+	.inputBox{
+		padding:10px 20px;
+	}
+	.signupBtn{
+		width: 400px;
+	}
+	.submitBtnBox{
+		display: flex;
+	    justify-content: center;
+	}
+	label{
+		margin-bottom:5px;
+	}
 </style>
 </head>
 
 
-<body class="bg-primary">
+<body class="">
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
@@ -30,35 +43,25 @@
                                 <div class="card-body">
 									<form action="${pageContext.request.contextPath}/user/signup" method="post" onsubmit="return confirmSignup()">
 										<div class="row mb-3">
-											<div class="col-md-6">
-												<div class="form-floating">
-													<label for="">아이디</label>
-													<input class="form-control" type="text" id="userId" name="userId" placeholder="아이디를 입력해주세요.">
-												</div>
+											<div class="inputBox">
+												<label for="userId">아이디</label>
+												<input class="form-control" type="text" id="userId" name="userId" placeholder="아이디를 입력해주세요.">
 											</div>
-											<div class="col-md-6">
-												<div class="form-floating">
-													<label for="">이름</label>
-													<input class="form-control" type="text" id="userName" name="userName" placeholder="이름을 입력해주세요.">
-												</div>
+											<div class="inputBox">
+												<label for="userName">이름</label>
+												<input class="form-control" type="text" id="userName" name="userName" placeholder="이름을 입력해주세요.">
 											</div>
-										</div>
-											<div class="form-floating mb-3">
-												<label for="">이메일</label>
+											<div class="inputBox">
+												<label for="userEmail">이메일</label>
 												<input class="form-control" type="email" id="userEmail" name="userEmail" placeholder="이메일을 입력해주세요.">
 											</div>
-										<div class="row mb-3">
-											<div class="col-md-6">
-												<div class="form-floating">
-													<label for="">비밀번호</label>
-													<input class="form-control" type="password" id="userPw" name="userPw" placeholder="비밀번호 16자 이내 " >
-												</div>
+											<div class="inputBox">
+												<label for="userPw">비밀번호</label>
+												<input class="form-control" type="password" id="userPw" name="userPw" placeholder="비밀번호 16자 이내 " >
 											</div>
-											<div class="col-md-6">
-												<div class="form-floating">
-													<label for="">비밀번호 확인</label>
-													<input class="form-control" type="password" id="userPw2" name="userPw2" placeholder="비밀번호를 확인해주세요.">
-												</div>
+											<div class="inputBox">
+												<label for="userPw2">비밀번호 확인</label>
+												<input class="form-control" type="password" id="userPw2" name="userPw2" placeholder="비밀번호를 확인해주세요.">
 											</div>
 										</div>
 											
@@ -69,8 +72,8 @@
 													</c:if>
 												</div>	
 												<div class="mt-4 mb-0">
-													<div class="d-grid">
-														<button type="submit" class="btn btn-primary btn-block" id="signupBtn">회원가입</button>	
+													<div class="submitBtnBox">
+														<button type="submit" class="signupBtn btn btn-outline-warning" id="signupBtn">회원가입</button>	
 													</div>
 												</div>
 											</div>
@@ -84,9 +87,6 @@
             </main>
         </div>
 	</div>
-
-	<a href="${pageContext.request.contextPath}/index">시작화면</a>
-	<a href="${pageContext.request.contextPath}/user/signin">로그인 화면</a>
 	
 
 <script type="text/javascript">

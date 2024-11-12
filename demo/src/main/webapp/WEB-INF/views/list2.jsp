@@ -14,15 +14,6 @@
 <title>게시판 목록 페이지</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-console.log("게시글");
-console.log("게시글 스크립트 테스트");
-/* 		$(function(){
-			$('#chk').click(function(){
-				
-			
-		}) */
-</script>
 
 </head>
 

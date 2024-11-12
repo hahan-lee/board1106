@@ -7,7 +7,8 @@
     User loggedInUser = (User) session.getAttribute("loggedInUser");
 %>
 <%@ include file="common/header.jsp" %>
-<%@page import="java.util.Date" %><%@page import="java.text.SimpleDateFormat" %>
+<%@page import="java.util.Date" %>
+<%@page import="java.text.SimpleDateFormat" %>
 
 
 <!DOCTYPE html>
@@ -28,11 +29,12 @@
 <br>
 <%
 sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-today = sf.format(now);%><%=today 
-%>
+today = sf.format(now);%>
+<%=today %>
 <br>
 <%sf = new SimpleDateFormat("yyyy년MM월dd일 E요일 a hh:mm:ss");
-today = sf.format(now);%>
+today = sf.format(now);
+%>
 <%=today %>
 <br>
 

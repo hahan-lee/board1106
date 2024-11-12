@@ -1,3 +1,4 @@
+
 package com.example.board.demo.model;
 
 import lombok.Getter;
