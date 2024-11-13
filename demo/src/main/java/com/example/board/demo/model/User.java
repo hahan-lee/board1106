@@ -27,5 +27,9 @@ public class User {
 	private String userEmail;
     private Date createdAt;
     
+    private String userPost;
+    private String userAddress;
+    private String userDetailAddress;
+    
 	
 }

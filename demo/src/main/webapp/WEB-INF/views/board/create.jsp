@@ -47,7 +47,7 @@
 	        <textarea id="content" class="form-control" name="content" rows="10" cols="30" required></textarea><br><br>
 	        
 	        <div class="button-container" class="form-label mt-4">
-	            <input type="submit" class="creatSubmitBtn btn btn-outline-primary " value="작성">
+	            <input type="submit" class="creatSubmitBtn btn btn-outline-primary" value="작성">
 	            <input type="button" class="listBtn btn btn-outline-primary" value="목록" onclick="goListBtn()">
 	        </div>
 	    </form>    

@@ -10,8 +10,8 @@
     
     <!-- 회원가입 쿼리 -->
     <insert id="insert" parameterType="User">
-        INSERT INTO Usertable (userId, userPw, userName, userEmail)
-        VALUES (#{userId}, #{userPw}, #{userName}, #{userEmail})
+        INSERT INTO Usertable (userId, userPw, userName, userEmail, userPost, userAddress, userDetailAddress)
+        VALUES (#{userId}, #{userPw}, #{userName}, #{userEmail}, #{userPost}, #{userAddress}, #{userDetailAddress})
     </insert>
     
     <!-- ID로 사용자 조회 쿼리 -->

@@ -77,28 +77,48 @@
 
 <script type="text/javascript">
 
-	function loginForm() {
-		const userId = document.getElementById("userId").value;
-		const userPw = document.getElementById("userPw").value;
-			    
-	    // 아이디가 입력되지 않은 경우
-	    if (userId.trim() === "") {
-	    	console.log("아이디");
-	        alert("아이디를 입력해주세요.");
-	        document.getElementById("userId").focus();
-	        return false; // 폼 제출 중단
-	    }
-	
-	    // 비밀번호가 입력되지 않은 경우
-	    if (userPw.trim() === "") {
-	    	console.log("비밀번호");
-	        alert("비밀번호를 입력해주세요.");
-	        document.getElementById("userPw").focus();
-	        return false; // 폼 제출 중단
-	    }
-	
-	    return true;
-	}
+	(($)=>{
+		
+		//값 test
+		function getItem(item){
+			const obj = $(item);
+			if(obj !== null){
+				return obj;
+			}else{
+				console.log(obj + "값 확인");
+			}
+		}
+		
+		/* input 값 공백 제거 이벤트*/
+		 $("#userId, #userPw, #userPw2, #userName, #userEmail").on("input", function() {
+		        $(this).val($(this).val().replace(/\s+/g, ""));
+		 });
+		
+		function loginForm() {
+			const userId = getItem("#userId").val();
+			const userPw = getItem("#userPw").val();
+						    
+		    // 아이디가 입력되지 않은 경우
+		    if (userId === "") {
+		    	console.log("아이디");
+		        alert("아이디를 입력해주세요.");
+		        $("#userId").focus();
+		        return false; // 폼 제출 중단
+		    }
+		
+		    // 비밀번호가 입력되지 않은 경우
+		    if (userPw === "") {
+		    	console.log("비밀번호");
+		        alert("비밀번호를 입력해주세요.");
+		        $("#userPw").focus();
+		        return false; // 폼 제출 중단
+		    }
+		
+		    return true;
+		}		
+		
+	})(jquery);
+
 </script>
 
 </body>

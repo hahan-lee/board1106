@@ -1,0 +1,22 @@
+2024-11-13T08:53:22.885+09:00  INFO 12648 --- [demo] [restartedMain] com.example.board.demo.DemoApplication   : Starting DemoApplication using Java 17.0.12 with PID 12648 (C:\Users\Ever1_NT143\git\board1106\demo\target\classes started by Ever1_NT143 in C:\Users\Ever1_NT143\git\board1106\demo)
+2024-11-13T08:53:22.885+09:00  INFO 12648 --- [demo] [restartedMain] com.example.board.demo.DemoApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-11-13T08:53:22.952+09:00  INFO 12648 --- [demo] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-11-13T08:53:22.954+09:00  INFO 12648 --- [demo] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1 ms. Found 0 JDBC repository interfaces.
+2024-11-13T08:53:22.990+09:00  INFO 12648 --- [demo] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-11-13T08:53:22.990+09:00  INFO 12648 --- [demo] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-13T08:53:22.990+09:00  INFO 12648 --- [demo] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-13T08:53:23.022+09:00  INFO 12648 --- [demo] [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2024-11-13T08:53:23.024+09:00  INFO 12648 --- [demo] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-11-13T08:53:23.024+09:00  INFO 12648 --- [demo] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 137 ms
+2024-11-13T08:53:23.059+09:00  INFO 12648 --- [demo] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-11-13T08:53:23.092+09:00  INFO 12648 --- [demo] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2024-11-13T08:53:23.103+09:00  INFO 12648 --- [demo] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection ConnectionID:21 ClientConnectionId: 0b043880-6c19-43c5-9757-b1f4c3c4e547
+2024-11-13T08:53:23.103+09:00  INFO 12648 --- [demo] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2024-11-13T08:53:23.104+09:00  WARN 12648 --- [demo] [restartedMain] o.s.data.convert.CustomConversions       : Registering converter from class microsoft.sql.DateTimeOffset to class java.time.OffsetDateTime as reading converter although it doesn't convert from a store-supported type; You might want to check your annotation setup at the converter implementation
+2024-11-13T08:53:23.112+09:00  INFO 12648 --- [demo] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-11-13T08:53:23.117+09:00  INFO 12648 --- [demo] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-11-13T08:53:23.120+09:00  INFO 12648 --- [demo] [restartedMain] com.example.board.demo.DemoApplication   : Started DemoApplication in 0.262 seconds (process running for 1158.866)
+2024-11-13T08:53:23.121+09:00  INFO 12648 --- [demo] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-11-13T08:54:10.757+09:00  INFO 12648 --- [demo] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2024-11-13T08:54:10.832+09:00  INFO 12648 --- [demo] [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2024-11-13T08:54:10.834+09:00  INFO 12648 --- [demo] [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
