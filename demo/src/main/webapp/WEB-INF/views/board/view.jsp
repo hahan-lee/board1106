@@ -3,12 +3,12 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="../common/header.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>게시글 상세 페이지</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 	body {
 	    font-family: Arial, sans-serif;
@@ -74,7 +74,7 @@
 			<div class="btnContainer">
 				<div class="btnBox">
 				    <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/board/edit/${board.id}">수정</a>
-				    <button class="btn btn-outline-danger"" id="deleteBtn">삭제</button>
+				    <button class="btn btn-outline-danger" id="deleteBtn">삭제</button>
 				    <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/board/list">목록</a>
 				</div>
 			
@@ -84,18 +84,39 @@
     	
 	 	
 	</div>
+
+
+
+
+<script type="text/javascript">
+
+	/*
+	(($)=>{
+		
+		alert('test');
+		
+		
+		$("#deleteBtn").on("click", function() {
+			alert('test');
+	        if(confirm("정말 삭제하시겠습니까?")) {
+	            window.location.href = `${pageContext.request.contextPath}/board/delete/${board.id}`;
+	        }
+	    });    	
+		
+	})(jquery); */
+
+	const deleteBtn = document.getElementById("deleteBtn");
+		
+		deleteBtn.addEventListener("click",function(){
+			if(confirm("정말 삭제하시겠습니까?")){
+				window.location.href = "${pageContext.request.contextPath}/board/delete/${board.id}";
+			}
+	}) 
+
+	
+</script>
     
-    <script>
-    	const deleteBtn = document.getElementById("deleteBtn");
-    	
-    	deleteBtn.addEventListener("click",function(){
-    		if(confirm("정말 삭제하시겠습니까?")){
-    			window.location.href = "${pageContext.request.contextPath}/board/delete/${board.id}";
-    		}
-    	})
-    
-    	
-    </script>
+
     
 </body>
 </html>

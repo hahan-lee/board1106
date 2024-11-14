@@ -8,9 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인페이지</title>
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
 	.container{
 		display:flex;
@@ -35,7 +32,7 @@
 </style>
 
 </head>
-<body class="">
+<body>
 
 <div class="container">
 	<div class="row">
@@ -75,7 +72,7 @@
 	
 	
 
-<script type="text/javascript">
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js">
 
 	(($)=>{
 		

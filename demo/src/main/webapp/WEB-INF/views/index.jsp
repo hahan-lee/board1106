@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 로드페이지</title>
+<title>테스트페이지</title>
 </head>
 <body>
 스프링부트 연결화면
